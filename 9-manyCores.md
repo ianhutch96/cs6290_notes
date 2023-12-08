@@ -1,6 +1,6 @@
 # Many Cores
 
-Two major challenges encountered in implementing a multi­core system are:
+Some major challenges encountered in implementing a multi­core system are:
 
 1. ­As the number of cores increases, coherence traffic increases. This requires:
     - A scalable on-­chip network
