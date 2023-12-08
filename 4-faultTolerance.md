@@ -40,6 +40,7 @@ that is never activated, so there is no error. Thus, **a fault is needed to prod
     - The availability is 50%
     - the reliability is 1 month
 - **Mean Time to Repair (MTTR)** is the time it takes until a service is restored when a service interruption occurs.
+- 
 $$ Availability = \frac{MTTF}{MTTF+MTTR}$$
 
 
@@ -98,9 +99,13 @@ $$ Availability = \frac{MTTF}{MTTF+MTTR}$$
   - x2 the data throughput of a single disk
   - Less queuing delay
 - The disadvantage is that reliability is worse.
+  
 $$  MTTF_{Single\ Disk} = \frac{1}{F_{Single\ Disk}}$$
+
 $$  Failure_{N\ Disks} = N * F_{Single\ Disk}$$
+
 $$  MTTF_{N\ Disks} = \frac{MTTF_{Single\ Disk}}{N}$$
+
 $$ MTT_{Data\ Loss} = MTTF_{Disk}$$
 
 ### RAID 1
@@ -109,9 +114,12 @@ $$ MTT_{Data\ Loss} = MTTF_{Disk}$$
 - The write performance is the same as for 1 disk.
 - The read performance is x2 throughput of 1 disk.
 - Tolerates any faults that affects 1 disk.
-- $$ MTT_{Data\ Loss\ RAID1} = \frac{MTTF_{Single\ Disk}}{2} + MTTF_{Single\ Disk}$$
+  
+$$ MTT_{Data\ Loss\ RAID1} = \frac{MTTF_{Single\ Disk}}{2} + MTTF_{Single\ Disk}$$
+  
 - The above assumes that no disk is replaced. If it is replaced the reliability is:
-- $$ MTT_{Data\ Loss\ RAID1} = \frac{MTTF_{Single\ Disk}}{2} * \frac{MTTF_{Single\ Disk}}{MTTR_{Single\ Disk}}\ , where\ MTTR_{Single\ Disk}\ = mean\ time\ to\ repair\ single\ disk$$
+  
+$$ MTT_{Data\ Loss\ RAID1} = \frac{MTTF_{Single\ Disk}}{2} * \frac{MTTF_{Single\ Disk}}{MTTR_{Single\ Disk}}\ , where\ MTTR_{Single\ Disk}\ = mean\ time\ to\ repair\ single\ disk$$
 
 ### RAID 4
 
@@ -122,7 +130,9 @@ $$ MTT_{Data\ Loss} = MTTF_{Disk}$$
 - A write to a RAID4 must write to the required disk and to the parity disk while a read just reads the required disk
 - Reads get a throughput of N-1 Disks (read from all data disks but not parity disk).
 - Writes get only 1/2 throughput of a single disk (a significant disadvantage and reason we need RAID 5)
-- $$ MTTF_{RAID\ 4} = \frac{MTTF_{Single\ Disk} * MTTF_{Single\ Disk}}{N*(N-1) * MTTR_{Single\ Disk}}$$
+  
+$$ MTTF_{RAID\ 4} = \frac{MTTF_{Single\ Disk} * MTTF_{Single\ Disk}}{N*(N-1) * MTTR_{Single\ Disk}}$$
+
 - **When doing a write, the data and parity bit must both be written.**
 - To update the parity bit without reading all the data bits:
   1. XOR the old data with the new data
