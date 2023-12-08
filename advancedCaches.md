@@ -4,8 +4,7 @@
 
 - There are three general categories of methods for improve cache performance all having to do with reducing the average memory access time.
   
-$$ AMAT = H_T + M_R * M_P $$
-$$ AMAT = Average\ Memory\ Access\ Time\\ H_T = Hit\ Time\\ M_R = Miss\ Rate\\ M_P = Miss\ Penalty $$
+$$  Average\ Memory\ Access\ Time\ (AMAT) = Hit\ Time + Miss\ Rate * Miss\ Penalty,\ where:$$
 
 - The three ways of doing this are by reducing either the hit time, miss rate, or miss penalty.
 
@@ -24,12 +23,7 @@ $$ AMAT = Average\ Memory\ Access\ Time\\ H_T = Hit\ Time\\ M_R = Miss\ Rate\\ M
 
 - One way of speeding up hit times is to overlap one hit with another and we can achieve this by pipelining the cache. If an access comes in cycle N and it's a hit, and then another access comes in cycles N+1 and it is also a hit, in a non-pipelined cache the second access has to wait.
 
-$$
-H_T =  A_T + W_T
-$$
-$$
-H_T =\ Hit\ Time\\ A_T=\ Actual\ Hit\ Time\ of\ Cache\\ W_T =\ Wait\ Time
-$$
+$$ Hit\ Time =\ Actual\ Hit\ Time\ of\ Cache\ + Wait\ Time $$
 
 - To pipeline a cache, partition the task into three stages
   1. Reading the index to find the set
@@ -62,8 +56,7 @@ the cache needs to be flushed with every context switch, leading to cache misses
 - The index bits come from the virtual address, the tag bits come from the physical address.
 - Both the cache lookup and the translation are done at the same time. It can be done without having to flush the cache and without aliasing. There is no aliasing if all the index bits come from the page offset. The cache has to be small enough to do this.
 
-$$ C_S <= A_C * P_S$$
-$$ C_S = Cache\ size\\A_C = Associativity\ of\ the\ cache \\P_S = Page\ Size$$
+$$ Cache\ size <= Associativity\ of\ the\ cache * Page\ Size \ \ \ where:$$
 
 #### Real VIPT Caches
 
@@ -147,11 +140,11 @@ $$ C_S = Cache\ size\\A_C = Associativity\ of\ the\ cache \\P_S = Page\ Size$$
 
 #### Cache Hierarchies
 
-$$ AMAT = L1_{HT} + L1_{MR} * L1_{MP} \ \ ,\ where:\\$$
-$$ AMAT = Average\ Memory\ Access\ Time\ ,\ L1_{HT} = L1\ Hit\ Time\ ,\ L1_{MR} = L1\ Miss\ Rate\ ,\ L1_{MP} = L1\ Miss\ Penalty\ $$
+$$ AMAT = L1_{Hit\ Time} + L1_{Miss\ Rate} * L1_{Miss\ Penalty} \ \ \ where:$$
 
-$$ L1_{MP} = L2_{HT} + L2_{MR} * L2_{MP} $$
-$$ L2_{MP} = L3_{HT} + L3_{MR} * L3_{MP} \\...$$
+$$ L1_{Miss\ Penalty} = L2_{Hit\ Time} + L2_{Miss\ Rate} * L2_{Miss\ Penalty} $$
+
+$$ L2_{Miss\ Penalty} = L3_{Hit\ Time} + L3_{Miss\ Rate} * L3_{Miss\ Penalty}\ ...$$
 
 - The last level cache (LLC) is the last cache in the hierarchy and its miss penalty is the main memory latency.
 - Local hit rate is the hit rate that the level cache actually observes.
